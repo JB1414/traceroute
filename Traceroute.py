@@ -23,7 +23,12 @@ class Traceroute:
         self.is_debug_mode = is_debug_mode
 
     def traceroute(self):
-        for i in range(self.max_ttl):
-            packet = self.packet.get_packet()
+        final_destination = self.packet.dst
+        for ttl in range(1, self.max_ttl + 1):
+            packet = self.packet.get_packet(ttl)
             ping = Ping(packet, self.timeout_seconds, self.repeat, self.interval_between_seconds)
             responce_info = ping.do_ping()
+            print(responce_info)
+            if final_destination == responce_info.reciever_address:
+                break
+            

@@ -1,15 +1,5 @@
-from scapy.all import *
+from Traceroute import Traceroute
+from ICMPv4Packet import *
 
-conf.verb = 0
-def is_responce_ttl_exeeded(packet : ICMP):
-    return packet.type == 11 and packet.code == 0
-
-for ttl in range(30):
-    pack = IP(dst="google.com", ttl=ttl)/ICMP()
-    responce = sr1(pack, timeout=1)
-    if responce is not None and is_responce_ttl_exeeded(responce):
-        sender_ip = responce.getlayer(IP).src
-        print(sender_ip)
-    else: continue
-
-
+packet = ICMPv4Packet("google.com", 40, 3)
+tracert = Traceroute(packet, 1, 0.5, 2, 30).traceroute()
