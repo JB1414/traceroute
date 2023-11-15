@@ -34,7 +34,7 @@ class Traceroute:
             times = responce_info.responces_times_miliseconds
             if address is None: 
                 result += "Server didn't respond on requests\n"
-                return
+                return result
             else: result += f"Succesfuly connected to {address}\n"
             for index, time in enumerate(times):
                 if time is not None:
