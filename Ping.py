@@ -33,8 +33,10 @@ class Ping:
             responce = sr1(self.packet, timeout=self.timeout_seconds, verbose=0)
             if responce is not None:
                 responce_time_miliseconds = Ping.to_miliseconds(responce.time - self.packet.sent_time)
-                responces_times_miliseconds.append(responce_time_miliseconds)
+                responces_times_miliseconds.append(round(responce_time_miliseconds))
                 reciever_address = responce[IP].src
+            else:
+                responces_times_miliseconds.append(None)
 
             sleep(self.interval_between_seconds)
         return ResponceInfo(reciever_address, responces_times_miliseconds)

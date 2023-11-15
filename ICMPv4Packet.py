@@ -1,10 +1,7 @@
 from scapy.all import IP, ICMP, RandString
 
 class ICMPv4Packet:
-    def __init__(self,
-                 dst: str,
-                 length: int,
-                 seq: int):
+    def __init__(self, dst: str, length: int, seq: int):
         self.dst = dst
         self.length = length
         self.seq = seq
