@@ -26,6 +26,10 @@ class Ping:
     @staticmethod
     def to_miliseconds(time_seconds): return time_seconds * 1000
 
+    @staticmethod
+    def get_organisation_info(address, ttl):
+        IPWhois(address).lookup_whois()['nets'][1]['description'] if ttl != 1 else "local"
+
     def do_ping(self) -> ResponceInfo:
         reciever_address = None
         responces_times_miliseconds = []

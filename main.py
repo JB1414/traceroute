@@ -26,7 +26,6 @@ def get_arguments():
 
 def get_packet(address, length, seq):
     if re.match(ipv4_pattern, address):
-        print("1")
         try:
             ipaddress.ip_address(address)
         except Exception:
