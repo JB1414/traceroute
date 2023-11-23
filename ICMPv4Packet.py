@@ -8,5 +8,5 @@ class ICMPv4Packet:
     
 
     def get_packet(self, ttl):
-        random_payload = str(RandString(self.length - 8))
+        random_payload = str(RandString(self.length - 28))
         return IP(dst=self.dst, ttl=ttl) / ICMP(seq=self.seq) / random_payload
