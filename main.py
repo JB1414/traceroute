@@ -8,7 +8,7 @@ import sys
 import socket
 
 ipv4_pattern = r"^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$"
-ipv6_pattern = r'^([0-9A-Fa-f]{1,4}:){7}[0-9A-Fa-f]{1,4}$'
+ipv6_pattern = r"(([0-9a-fA-F]{1,4}:){7,7}[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,7}:|([0-9a-fA-F]{1,4}:){1,6}:[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,5}(:[0-9a-fA-F]{1,4}){1,2}|([0-9a-fA-F]{1,4}:){1,4}(:[0-9a-fA-F]{1,4}){1,3}|([0-9a-fA-F]{1,4}:){1,3}(:[0-9a-fA-F]{1,4}){1,4}|([0-9a-fA-F]{1,4}:){1,2}(:[0-9a-fA-F]{1,4}){1,5}|[0-9a-fA-F]{1,4}:((:[0-9a-fA-F]{1,4}){1,6})|:((:[0-9a-fA-F]{1,4}){1,7}|:)|fe80:(:[0-9a-fA-F]{0,4}){0,4}%[0-9a-zA-Z]{1,}|::(ffff(:0{1,4}){0,1}:){0,1}((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])|([0-9a-fA-F]{1,4}:){1,4}:((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9]))"
 domain_name_pattern = r'^[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*(\.[a-zA-Z]{2,})$'
 
 def get_arguments():
@@ -29,25 +29,25 @@ def get_packet(address, length, seq):
         try:
             ipaddress.ip_address(address)
         except Exception:
-            print("Invalid address")
+            print("Invalid address 1")
             sys.exit(-1)
         return ICMPv4Packet(address, length, seq)
     elif re.match(ipv6_pattern, address):
         try:
             ipaddress.IPv6Address(address)
         except ipaddress.AddressValueError:
-            print("Invalid address")
+            print("Invalid address 2")
             sys.exit(-1)
         return ICMPv6Packet(address, length, seq)
     elif re.match(domain_name_pattern, address):
         try:
             ip_address = socket.gethostbyname(address)
         except socket.gaierror:
-            print("Invalid address")
+            print("Invalid address 3")
             sys.exit(-1)
         return ICMPv4Packet(ip_address, length, seq)
     else: 
-        print("Invalid address")
+        print("Invalid address 4")
         sys.exit(-1)
 
 def check_length(len):

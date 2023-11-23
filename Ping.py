@@ -1,6 +1,7 @@
 from scapy.all import ICMP, sr1, ICMPv6EchoRequest, IP
 from time import sleep
 from collections import namedtuple
+from ipwhois import IPWhois
 
 ResponceInfo = namedtuple("ResponceInfo", ["reciever_address", "responces_times_miliseconds"])
 
