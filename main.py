@@ -63,14 +63,17 @@ def check_timeout(timeout):
 def check_interval(interval):
     if interval < 0:
         print(f"Interval can't be negative")
+        sys.exit(-1)
 
 def check_repeat(repeat):
     if repeat < 0:
         print(f"Repeat can't be negative")
+        sys.exit(-1)
 
 def check_maxhops(maxhops):
     if maxhops < 0:
         print(f"Maxhops (TTL) cannot be negative")
+        sys.exit(-1)
 
 def check_arguments(args):
     check_length(args.length)
