@@ -10,6 +10,7 @@ from Ping import Ping, ResponceInfo
 import time
 from Traceroute import Traceroute
 
+
 class TestGetPacket:
     @pytest.mark.parametrize("address, expected_type", [
         ("192.168.1.1", ICMPv4Packet),
@@ -34,7 +35,7 @@ class TestGetPacket:
         with pytest.raises(SystemExit) as exc_info:
             get_packet(address, 40, 1)
         assert exc_info.type == SystemExit
-        assert exc_info.value.code == -1 
+        assert exc_info.value.code == -1
 
 
 class TestValidations:
@@ -92,6 +93,7 @@ class TestICMPv4Packet:
         assert seq == packet_seq
         assert length == packet_length
 
+
 class TestICMPv6Packet:
     @pytest.mark.parametrize("dst, length, seq, ttl", [
         ("2a00:1450:4010:c08::64", 40, 1, 1),
@@ -107,6 +109,7 @@ class TestICMPv6Packet:
         assert dst == packet_dst
         assert ttl == packet_ttl
         assert seq == packet_seq
+
 
 class TestPing:
     @pytest.mark.parametrize('timeout_seconds, repeat, interval', [
@@ -132,7 +135,6 @@ class TestPing:
         end_time = time.time()
         duration = end_time - start_time
         assert duration >= repeat * interval
-
 
     @pytest.mark.parametrize("packet_type, packet_code, expected", [
         (11, 0, True),  # Тип и код для TTL превышен
